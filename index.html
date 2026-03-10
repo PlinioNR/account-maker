@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Maker</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-3">
+
+    <div class="container bg-white shadow-sm rounded p-4" style="max-width: 500px;">
+        <h4 class="text-center mb-4 text-success">Registo de Conta</h4>
+
+        <form id="accountForm" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Nome</label>
+                <input type="text" id="nome" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label small fw-bold">E-mail</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label small fw-bold">Telefone</label>
+                    <input type="tel" id="telefone" class="form-control" required pattern="[0-9]{9,}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label small fw-bold">NIF</label>
+                    <input type="text" id="nif" class="form-control" required pattern="[0-9]{9}">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Morada</label>
+                <input type="text" id="morada" class="form-control" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label small fw-bold">Observações (Opcional)</label>
+                <textarea id="obs" class="form-control" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Criar Conta</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('accountForm');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                event.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+
+            const dados = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('telefone').value,
+                nif: document.getElementById('nif').value,
+                morada: document.getElementById('morada').value,
+                observacoes: document.getElementById('obs').value
+            };
+
+            console.log("Sucesso! Conta criada com os seguintes dados:", dados);
+
+            
+            form.reset();
+            form.classList.remove('was-validated');
+        });
+    </script>
+</body>
+</html>
